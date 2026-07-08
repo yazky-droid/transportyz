@@ -9,16 +9,19 @@ import AppCard from '@/Components/App/AppCard.vue'
 import AppBadge from '@/Components/App/AppBadge.vue'
 import AppDivider from '@/Components/App/AppDivider.vue'
 import AppSkeleton from '@/Components/App/AppSkeleton.vue'
+import AppLogo from '@/Components/App/AppLogo.vue'
+import PublicLayout from '@/Layouts/PublicLayout.vue'
 
 </script>
 
 
 <template>
+<PublicLayout>
 
 <AppSection>
 
 <AppContainer>
-
+    <AppLogo />
     <AppHeading level="display">
         Premium Transport Booking
     </AppHeading>
@@ -27,7 +30,7 @@ import AppSkeleton from '@/Components/App/AppSkeleton.vue'
     <AppText muted>
         Book your journey with a seamless experience.
     </AppText>
-    <div class="flex gap-4">
+    <div class="flex flex-row gap-4">
 
     <AppButton>
         Search Journey
@@ -37,9 +40,9 @@ import AppSkeleton from '@/Components/App/AppSkeleton.vue'
     <AppButton variant="secondary">
         Back
     </AppButton>
-
-
-    <AppButton
+    </div>
+    <div>
+        <AppButton
         variant="ghost"
     >
         Cancel
@@ -153,5 +156,5 @@ import AppSkeleton from '@/Components/App/AppSkeleton.vue'
 </AppContainer>
 
 </AppSection>
-
+</PublicLayout>
 </template>
