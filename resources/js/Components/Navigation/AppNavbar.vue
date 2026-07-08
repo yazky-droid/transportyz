@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import { router } from '@inertiajs/vue3'
+
 import AppButton from '@/Components/App/AppButton.vue'
 import AppContainer from '@/Components/App/AppContainer.vue'
 import AppLogo from '@/Components/App/AppLogo.vue'
@@ -19,6 +21,13 @@ const menus = [
         href: '#',
     },
 ]
+
+
+const bookNow = () => {
+    router.get(
+        route('booking.search')
+    )
+}
 
 </script>
 
@@ -106,7 +115,7 @@ const menus = [
         </a>
 
 
-        <AppButton>
+        <AppButton @click="bookNow">
             Book Now
         </AppButton>
 

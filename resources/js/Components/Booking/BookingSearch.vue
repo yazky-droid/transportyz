@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'
+import { router } from '@inertiajs/vue3'
 
 import AppButton from '@/Components/App/AppButton.vue'
 import AppCard from '@/Components/App/AppCard.vue'
@@ -14,12 +15,17 @@ const passenger = ref('1')
 
 
 const search = () => {
-    console.log({
-        origin: origin.value,
-        destination: destination.value,
-        date: date.value,
-        passenger: passenger.value,
-    })
+
+    router.get(
+        route('booking.results'),
+        {
+            origin: origin.value,
+            destination: destination.value,
+            date: date.value,
+            passenger: passenger.value,
+        }
+    )
+
 }
 
 </script>
