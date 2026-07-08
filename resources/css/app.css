@@ -33,9 +33,19 @@
     --color-muted: #F8FAFC;
     --color-border: #E5E7EB;
 
+    --color-success: #16A34A;
+    --color-success-foreground: #FFFFFF;
+
+    --color-warning: #D97706;
+    --color-warning-foreground: #FFFFFF;
+
+    --color-skeleton: #E2E8F0;
+
     --color-surface: #FFFFFF;
 
     --color-surface-muted: #FAFAFA;
+
+    --bg-skeleton: #F1F5F9;
 
     --shadow-soft:
         0 1px 3px rgba(15, 23, 42, 0.06);

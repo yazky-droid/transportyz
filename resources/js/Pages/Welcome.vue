@@ -6,6 +6,9 @@ import AppHeading from '@/Components/App/AppHeading.vue'
 import AppText from '@/Components/App/AppText.vue'
 import AppButton from '@/Components/App/AppButton.vue'
 import AppCard from '@/Components/App/AppCard.vue'
+import AppBadge from '@/Components/App/AppBadge.vue'
+import AppDivider from '@/Components/App/AppDivider.vue'
+import AppSkeleton from '@/Components/App/AppSkeleton.vue'
 
 </script>
 
@@ -88,6 +91,64 @@ import AppCard from '@/Components/App/AppCard.vue'
 
 
     </div>
+
+    <div class="flex gap-2">
+    <AppBadge>
+        Popular
+    </AppBadge>
+
+
+    <AppBadge variant="success">
+        Available
+    </AppBadge>
+
+
+    <AppBadge variant="warning">
+        Almost Full
+    </AppBadge>
+    </div>
+
+    <AppDivider />
+
+    <div class="flex h-10 items-center gap-4">
+
+        Menu
+
+        <AppDivider orientation="vertical" />
+
+        Account
+
+    </div>
+
+    <AppSkeleton />
+
+    <div class="space-y-3">
+
+        <AppSkeleton
+            height="200px"
+        />
+
+        <AppSkeleton
+            width="60%"
+        />
+
+    </div>
+
+    <AppSkeleton
+    variant="circle"
+    width="48px"
+    height="48px"
+    />
+
+    <AppSkeleton width="50%" />
+
+    <AppSkeleton height="50px" />
+
+    <AppSkeleton
+        variant="circle"
+        width="100px"
+        height="100px"
+    />
 
 </AppContainer>
 
