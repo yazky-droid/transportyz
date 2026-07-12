@@ -8,134 +8,186 @@ import AppContainer from '@/Components/App/AppContainer.vue'
 import AppHeading from '@/Components/App/AppHeading.vue'
 import AppSection from '@/Components/App/AppSection.vue'
 
+import { router } from '@inertiajs/vue3'
 
-const confirmBooking = () => {
+import { useBookingStore } from '@/Stores/booking'
 
-    alert('Booking confirmed')
+
+const booking = useBookingStore()
+
+
+
+const confirmBooking = ()=>{
+
+
+    booking.createConfirmation()
+
+
+    router.get(
+        route('booking.confirmation')
+    )
+
 
 }
 
 </script>
 
-
 <template>
+    <PublicLayout>
+        <AppSection>
+            <AppContainer>
+                <AppHeading level="h1">
+                    Booking Summary
+                </AppHeading>
 
-<PublicLayout>
+                <AppCard class="mt-8">
+                    <div class="space-y-6">
 
-<AppSection>
+                        <div>
+                            <p class="text-sm text-muted-foreground">
+                                Route
+                            </p>
 
-<AppContainer>
+                            <p class="font-semibold">
 
+                            {{ booking.origin ?? '-' }}
 
-<AppHeading level="h1">
-    Booking Summary
-</AppHeading>
+                            →
 
+                            {{ booking.destination ?? '-' }}
 
+                            </p>
+                        </div>
 
-<AppCard
-    class="mt-8"
->
+                        <div>
 
-
-<div
-    class="
-        space-y-6
-    "
->
-
-
-<div>
-
-<p class="text-sm text-muted-foreground">
-    Route
-</p>
-
-
-<p class="font-semibold">
-    Jakarta → Bandung
-</p>
-
-</div>
+                            <p class="text-sm text-muted-foreground">
+                                Departure Date
+                            </p>
 
 
+                            <p class="font-semibold">
 
-<div>
+                            {{ booking.departureDate || '-' }}
 
-<p class="text-sm text-muted-foreground">
-    Schedule
-</p>
+                            </p>
 
+                        </div>
 
-<p class="font-semibold">
-    08:00 - 11:00
-</p>
+                        <div>
+                            <p class="text-sm text-muted-foreground">
+                                Schedule
+                            </p>
 
-</div>
+                            <p class="font-semibold">
+                                {{ booking.schedule?.departure ?? '-' }}
+                                →
+                                {{ booking.schedule?.arrival ?? '-' }}
+                            </p>
+                        </div>
 
+                        <div>
 
-
-<div>
-
-<p class="text-sm text-muted-foreground">
-    Passenger
-</p>
-
-
-<p class="font-semibold">
-    John Doe
-</p>
-
-</div>
+                        <p class="text-sm text-muted-foreground">
+                            Passengers
+                        </p>
 
 
+                        <p class="font-semibold">
 
-<div
-    class="
-        border-t
-        border-border
-        pt-6
-    "
->
+                        {{ booking.passengerCount }}
 
-<p class="text-sm text-muted-foreground">
-    Total
-</p>
+                        person
 
+                        </p>
 
-<p
-    class="
-        text-2xl
-        font-semibold
-    "
->
-Rp150.000
-</p>
+                        </div>
 
-</div>
+                        <div>
+                            <p class="text-sm text-muted-foreground">
+                                Passenger
+                            </p>
 
+                            <p class="font-semibold">
+                                {{ booking.passengers[0]?.name || '-' }}
+                            </p>
 
+                            <p
+                                v-if="booking.passengers[0]?.email"
+                                class="mt-1 text-sm text-muted-foreground"
+                            >
+                                {{ booking.passengers[0].email }}
+                            </p>
 
-<AppButton
-    class="w-full"
-    size="lg"
-    @click="confirmBooking"
->
-    Confirm Booking
-</AppButton>
+                            <p
+                                v-if="booking.passengers[0]?.phone"
+                                class="text-sm text-muted-foreground"
+                            >
+                                {{ booking.passengers[0].phone }}
+                            </p>
+                        </div>
 
+                        <div>
 
-
-</div>
-
-
-</AppCard>
+                            <p class="text-sm text-muted-foreground">
+                                Seats
+                            </p>
 
 
-</AppContainer>
+                            <div class="flex gap-2 mt-2">
 
-</AppSection>
+                            <span
+                                v-for="seat in booking.selectedSeats"
+                                :key="seat.id"
 
-</PublicLayout>
+                                class="
+                                    rounded-lg
+                                    bg-muted
+                                    px-3
+                                    py-1
+                                    text-sm
+                                "
+                            >
 
+                            {{ seat.number }}
+
+                            </span>
+
+
+                            <span
+                                v-if="!booking.selectedSeats.length"
+                            >
+                            -
+                            </span>
+
+                            </div>
+
+                            </div>
+                        <div
+                            class="border-t border-border pt-6"
+                        >
+                            <p class="text-sm text-muted-foreground">
+                                Total
+                            </p>
+
+                            <p
+                                class="text-2xl font-semibold"
+                            >
+                                Rp {{ (booking.schedule?.price * booking.passengerCount).toLocaleString('id-ID') }}
+                            </p>
+                        </div>
+
+                        <AppButton
+                            class="w-full"
+                            size="lg"
+                            @click="confirmBooking"
+                        >
+                            Confirm Booking
+                        </AppButton>
+
+                    </div>
+                </AppCard>
+            </AppContainer>
+        </AppSection>
+    </PublicLayout>
 </template>

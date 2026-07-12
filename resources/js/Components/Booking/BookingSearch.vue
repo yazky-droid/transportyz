@@ -3,28 +3,44 @@
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 
+import { useBookingStore } from '@/Stores/booking'
+
+
 import AppButton from '@/Components/App/AppButton.vue'
 import AppCard from '@/Components/App/AppCard.vue'
 import AppInput from '@/Components/Form/AppInput.vue'
 
 
+const booking = useBookingStore()
+
+
 const origin = ref('')
 const destination = ref('')
 const date = ref('')
-const passenger = ref('1')
+const passenger = ref(1)
+
 
 
 const search = () => {
 
+
+    booking.setSearch({
+
+        origin: origin.value,
+
+        destination: destination.value,
+
+        departureDate: date.value,
+
+        passengerCount: passenger.value,
+
+    })
+
+
     router.get(
-        route('booking.results'),
-        {
-            origin: origin.value,
-            destination: destination.value,
-            date: date.value,
-            passenger: passenger.value,
-        }
+        route('booking.results')
     )
+
 
 }
 

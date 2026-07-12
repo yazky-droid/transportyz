@@ -19,6 +19,7 @@
         "vue-tsc": "^3.3.7"
     },
     "dependencies": {
-        "geist": "^1.7.2"
+        "geist": "^1.7.2",
+        "pinia": "^3.0.4"
     }
 }

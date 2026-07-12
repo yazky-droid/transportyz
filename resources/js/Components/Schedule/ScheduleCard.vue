@@ -1,32 +1,37 @@
 <script setup lang="ts">
-import { router } from '@inertiajs/vue3'
+import type { Schedule } from '@/Types/Booking'
 import AppBadge from '@/Components/App/AppBadge.vue'
 import AppButton from '@/Components/App/AppButton.vue'
 import AppCard from '@/Components/App/AppCard.vue'
 
-interface Props {
+
+const props = defineProps<{
+    id: number
     departure: string
     arrival: string
     duration: string
     className: string
-    price: string
-}
+    price: number
+}>()
 
-// 1. Simpan macro defineProps ke dalam sebuah variabel (biasanya dinamai 'props')
-const props = defineProps<Props>()
+
+const emit = defineEmits<{
+
+    choose: [
+        schedule: Schedule
+    ]
+
+}>()
+
+
 
 const choose = () => {
-    router.get(
-        route('booking.passenger'),
-        {
-            // 2. Akses datanya menggunakan props.namaProperti
-            departure: props.departure,
-            arrival: props.arrival,
-            duration: props.duration,
-            className: props.className,
-            price: props.price,
-        }
+
+    emit(
+        'choose',
+        props
     )
+
 }
 </script>
 

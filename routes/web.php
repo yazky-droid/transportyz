@@ -35,6 +35,22 @@ Route::get('/booking/summary', function () {
     return Inertia::render('Booking/Summary');
 })->name('booking.summary');
 
+Route::get('/booking/seats', function () {
+
+    return Inertia::render(
+        'Booking/SeatSelection'
+    );
+
+})->name('booking.seats');
+
+Route::get('/booking/confirmation', function () {
+
+    return Inertia::render(
+        'Booking/Confirmation'
+    );
+
+})->name('booking.confirmation');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
